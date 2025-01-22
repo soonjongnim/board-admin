@@ -13,7 +13,7 @@ interface IQuillEditorCoreProps {
 }
 
 const QuillEditorCore = ({ value, onChange, placeholder }: IQuillEditorCoreProps) => {
-  const quillRef = useRef<ReactQuill>(null);
+  const quillRef = useRef<typeof ReactQuill>(null);
   const { imageFileList, setImageFileList } = useImageStore(); // 새 이미지를 위한 스토어
   const [prevContent, setPrevContent] = useState<string>(''); // 이전 콘텐츠 추적
   const { editorContent, setEditorContent } = useImageStore(); // Default to initial itemDetail
@@ -94,7 +94,7 @@ const QuillEditorCore = ({ value, onChange, placeholder }: IQuillEditorCoreProps
       if (currentHTML.length < previousHTML.length) {
         console.log('Content was deleted!'); // Debug 8
 
-        const currentImageTags = Array.from(quill.root.querySelectorAll('img')).map(img => img.src);
+        const currentImageTags = Array.from(quill.root.querySelectorAll('img') as NodeListOf<HTMLImageElement>).map((img: HTMLImageElement) => img.src);
         const previousImageTags = Array.from(new DOMParser().parseFromString(previousHTML, 'text/html').querySelectorAll('img')).map(img => img.src);
 
         // 삭제된 이미지 찾기
