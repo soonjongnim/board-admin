@@ -1,6 +1,6 @@
 import { getDefaultLayout, IDefaultLayoutPage, IPageHeader } from "@/components/layout/default-layout";
 import React from 'react';
-import ProfileCard from "@/components/page/profile/ProfileCard";
+import ProfileCard from "../../components/page/profile/ProfileCard";
 import { useSession } from "next-auth/react";
 
 const pageHeader: IPageHeader = {
