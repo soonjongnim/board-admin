@@ -54,7 +54,7 @@ html {
     "Segoe UI Symbol",
     "Noto Color Emoji"
   ); /* 4 */
-  font-feature-settings: theme("fontFamily.sans[1].fontFeatureSettings", normal); /* 5 */
+  font-feature-settings: normal; /* 5 */
 }
 
 /*

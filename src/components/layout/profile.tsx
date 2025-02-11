@@ -9,13 +9,13 @@ const Profile = () => {
   const { session } = useAuth();
 
   const handleLogoutClick = useCallback(async () => {
-    signOut({ callbackUrl: "/login" });
+    signOut({ callbackUrl: "/admin/login" });
   }, []);
 
   const items: MenuProps["items"] = [
     {
       label: (
-        <Link href="/sample/profile" className="min-w-[8rem] link-with-icon">
+        <Link href="/admin/profile" className="min-w-[8rem] link-with-icon">
           <User width={16} height={16} />내 프로필
         </Link>
       ),

@@ -9,7 +9,7 @@ const mainMenuData: IMenu[] = [
     name: "홈",
     icon: <Home className="w-5 h-5" />,
     link: {
-      path: "/",
+      path: "/admin",
     },
   },
   {
@@ -21,7 +21,7 @@ const mainMenuData: IMenu[] = [
         id: "productList",
         name: "상품 목록",
         link: {
-          path: "/sample/product/list",
+          path: "/admin/product/list",
         },
       },
     ],
@@ -37,7 +37,7 @@ const devMenuData: IMenu[] = [
       {
         name: "폼",
         link: {
-          path: "/sample/form",
+          path: "/admin/form",
         },
       },
     ],

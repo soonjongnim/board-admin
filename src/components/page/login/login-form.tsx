@@ -20,8 +20,11 @@ const LoginForm = () => {
     setIsLoading(true);
 
     try {
-      console.log(value);
-      await signIn("login-credentials", { username: value.username, password: value.password });
+      await signIn("credentials", { 
+        username: value.username, 
+        password: value.password,
+        // callbackUrl: `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/sample/dashboard`
+      });
     } catch (error) {
       setIsLoading(false);
     }

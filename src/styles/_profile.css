@@ -1,0 +1,27 @@
+.profile-page {
+    padding: 20px;
+  }
+  
+  .profile-card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .avatar {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  h2 {
+    margin: 10px 0;
+  }
+  
+  p {
+    margin: 5px 0;
+  }

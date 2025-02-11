@@ -93,7 +93,7 @@ const ProductList = () => {
       render: (_value: unknown, record: ItemListItem) => {
         return (
           <span className="flex justify-center gap-2">
-            <Link href={`/sample/product/edit/${record.itemId}`} className="px-2 py-1 text-sm btn">
+            <Link href={`/admin/product/edit/${record.itemId}`} className="px-2 py-1 text-sm btn">
               수정
             </Link>
             <Popconfirm
@@ -189,7 +189,7 @@ const ProductList = () => {
           <Button className="btn-with-icon" icon={<Download />} onClick={downloadExcel}>
             엑셀 다운로드
           </Button>
-          <Button type="primary" onClick={() => router.push("/sample/product/new")}>
+          <Button type="primary" onClick={() => router.push("/admin/product/new")}>
             상품등록
           </Button>
         </div>

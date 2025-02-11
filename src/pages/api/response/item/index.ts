@@ -1,8 +1,8 @@
-import PostItemResponseDto from "../item/post-item.response.dto";
-import GetItemListResponseDto from "../item/get-item-list.response.dto";
-import GetItemResponseDto from "../item/get-item.response.dto";
-import PatchItemResponseDto from "../item/patch-item.response.dto";
-import DeleteItemResponseDto from "../item/delete-item.response.dto";
+import PostItemResponseDto from "./post-item.response.dto";
+import GetItemListResponseDto from "./get-item-list.response.dto";
+import GetItemResponseDto from "./get-item.response.dto";
+import PatchItemResponseDto from "./patch-item.response.dto";
+import DeleteItemResponseDto from "./delete-item.response.dto";
 
 export type {
     PostItemResponseDto,

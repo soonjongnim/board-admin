@@ -6,21 +6,28 @@ import GoogleProvider from "next-auth/providers/google";
 
 const credentialsProviderOption: CredentialsConfig<{}> = {
   type: "credentials",
-  id: "login-credentials",
-  name: "login-credentials",
+  id: "credentials",
+  name: "credentials",
   credentials: {
     username: { label: "Username", type: "text" },
     password: { label: "Password", type: "password" },
   },
   async authorize(credentials: Record<string, unknown> | undefined) {
     if (credentials && credentials.username === "admin" && credentials.password === "admin") {
-      return {
+      // 사용자 인증 로직
+      const user = {
         id: "1",
-        login: "admin",
+        role: "admin",
         name: "관리자",
-        email: "",
+        email: "soon9086@naver.com",
         image: "",
       };
+
+      if (user) {
+        return user;
+      } else {
+        return null;
+      }
     }
 
     return null;
@@ -40,27 +47,35 @@ const githubProviderOption: OAuthUserConfig<{}> = {
 };
 
 export default NextAuth({
-  pages: {
-    signIn: "/login",
-    verifyRequest: "/login?verify=1",
-    error: "/login",
-  },
   providers: [
     CredentialsProvider(credentialsProviderOption),
     GoogleProvider(googleProviderOption),
     GithubProvider(githubProviderOption),
   ],
   callbacks: {
-    jwt({ token, user }) {
-      if (user) {
-        token.id = (user as Session["user"]).id;
-        token.login = (user as Session["user"]).login;
+    async session({ session, token, user }) {
+      if (token) {
+        session.user = {
+          id: token.id as string,
+          login: token.email as string,
+          role: token.role as string,
+          name: token.name,
+          email: token.email,
+          image: token.image as string,
+        };
       }
-      return token;
-    },
-    session({ session, token }) {
-      session.user = { ...session.user, id: token.id as string, login: token.login as string };
       return session;
     },
+    async jwt({ token, user }: { token: any; user?: any }) {
+      if (user) {
+        token.id = user.id;
+        token.role = user.role;
+        token.name = user.name;
+        token.email = user.email;
+        token.image = user.image;
+      }
+      return token;
+    }
   },
+  debug: true,
 });

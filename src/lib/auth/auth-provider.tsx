@@ -25,7 +25,7 @@ export function useAuth() {
   return result;
 }
 
-const publicPageList = ["/login"];
+const publicPageList = ["/admin/login"];
 
 const isPublicPage = (pathname: string) => {
   return publicPageList.includes(pathname);
@@ -42,9 +42,10 @@ const AuthProvider = ({ children }: PropsWithChildren<IAuthProviderProps>) => {
     }
 
     if (session && isPublicPage(router.pathname)) {
-      router.push("/");
+      router.push("/admin");
     } else if (!session && !isPublicPage(router.pathname)) {
-      router.push("/login");
+      console.log("AuthProvider: " + router.pathname);
+      router.push("/admin/login");
     }
   }, [loading, router, session]);
 
