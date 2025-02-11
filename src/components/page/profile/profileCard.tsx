@@ -21,4 +21,4 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ name, email, role, avatarUrl 
   );
 };
 
-export default ProfileCard;
+export default React.memo(ProfileCard);
