@@ -6,7 +6,7 @@ console.log('NEXTAUTH_SECRET:', process.env.NEXTAUTH_SECRET);
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // distDir: 'build',
-  // output: 'export',
+  output: 'export',
   // typescript: {
   //     ignoreBuildErrors: true, // 빌드 중 에러를 무시
   // },
