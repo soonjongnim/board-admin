@@ -9,4 +9,5 @@ export default interface Item {
 	updateTime: string;
 	writerEmail: string;
 	imageUrlList: string[];
+	thumbnailList: string[];
 }

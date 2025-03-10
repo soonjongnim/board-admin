@@ -62,10 +62,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // 생성
     // 생성할때 여기 안탐, index.ts로 탐
     console.log('POST req.body: ', req.body);
-    const { itemName, price, itemSellStatus, stockNumber, itemDetail, imageUrlList } = req.body;
+    const { itemName, price, itemSellStatus, stockNumber, itemDetail, imageUrlList, thumbnailUrlList } = req.body;
     const writerEmail = 'soon9086@gmail.com'; // 임시
     const requestBody: PostItemRequestDto = {
-      itemName, price, itemSellStatus, itemDetail, stockNumber, writerEmail, imageUrlList
+      itemName, price, itemSellStatus, itemDetail, stockNumber, writerEmail, imageUrlList, thumbnailUrlList
     }
     const responseBody: PostItemResponseDto | ResponseDto | null = await postItemRequest(requestBody);
     console.log('PostItemResponseDto responseBody: ', responseBody)
@@ -76,9 +76,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   } else if (req.method === "PUT") {
     // 수정
     // console.log('PUT req.body: ', req.body);
-    const { itemId, itemName, price, itemSellStatus, stockNumber, itemDetail, imageUrlList } = req.body;
+    const { itemId, itemName, price, itemSellStatus, stockNumber, itemDetail, imageUrlList, thumbnailUrlList } = req.body;
     console.log('PUT itemDetail: ', itemDetail);
     console.log('PUT imageUrlList: ', imageUrlList);
+    console.log('PUT thumbnailUrlList: ', thumbnailUrlList);
 
     // Extract and save all images using a loop
     // const resultImages = handleSubmit(itemDetail);
@@ -91,7 +92,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     //}
 
     const requestBody: PatchItemRequestDto = {
-      itemId, itemName, price, itemSellStatus, itemDetail, stockNumber, imageUrlList
+      itemId, itemName, price, itemSellStatus, itemDetail, stockNumber, imageUrlList, thumbnailUrlList
     }
     const responseBody: PatchItemResponseDto | ResponseDto | null = await patchItemRequest(String(req.query.id), requestBody);
     console.log('PatchItemResponseDto responseBody: ', responseBody)

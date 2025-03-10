@@ -1,3 +1,5 @@
+import IThumbnail from '@/types/interface/iThumbnail.interface';
+
 export default interface PostItemRequestDto {
     // itemId: number;
 	itemName: string;
@@ -9,4 +11,5 @@ export default interface PostItemRequestDto {
 	// updateTime: string;
 	writerEmail: string;
 	imageUrlList: string[];
+	thumbnailUrlList: IThumbnail[];
 }

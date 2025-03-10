@@ -19,7 +19,9 @@ export interface IProduct {
 }
 
 export interface IProductFormValue extends Omit<Item, "itemId" | "regTime" | "updateTime"> {
+  thumbnailUrlList: string[]; // ✅ 썸네일 리스트 타입 지정
   searchDatePeriod: [];
+  brand: string;
   // itemSellStatuss: [];
 }
 

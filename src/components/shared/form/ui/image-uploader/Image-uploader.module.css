@@ -1,0 +1,36 @@
+.chooseFile {
+    cursor: pointer;
+    padding: 10px;
+    background-color: #0070f3;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    width: 120px;
+    margin: 10px 0;
+  }
+  
+  .imgContainer {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .imgBox {
+    position: relative;
+    width: 200px;
+    height: 200px;
+  }
+  
+  .imgBox img {
+    height: 100%;
+  }
+
+  .deleteImg {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    color: red;
+    font-size: 20px;
+  }
+  
