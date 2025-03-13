@@ -12,13 +12,14 @@ import { useRouter } from "next/router";
 import numeral from "numeral";
 import React, { useCallback, useMemo, useState } from "react";
 import * as XLSX from 'xlsx';
+import { DEFAULT_PAGE_SIZE } from '@/constants/pagination';
 
 const ProductList = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const router = useRouter();
-
-  const { data, error, isLoading, mutate } = useProducts({ ...router.query, page: router.query.page ? Number(router.query.page) : 1 });
-
+  
+  const { data, error, isLoading, mutate } = useProducts({ ...router.query, page: router.query.page ? Number(router.query.page) : 1, defaultPageSize: DEFAULT_PAGE_SIZE });
+  console.log('data?.data: ', data?.data);
   const downloadExcel = () => {
     if (!data) return;
   
@@ -43,7 +44,7 @@ const ProductList = () => {
     (pageNumber: number) => {
       router.push({
         pathname: router.pathname,
-        query: { ...router.query, page: pageNumber },
+        query: { ...router.query, page: pageNumber, defaultPageSize: DEFAULT_PAGE_SIZE },
       });
     },
     [router]
@@ -203,7 +204,7 @@ const ProductList = () => {
         loading={isLoading}
         pagination={{
           current: Number(router.query.page || 1),
-          defaultPageSize: 5,
+          defaultPageSize: DEFAULT_PAGE_SIZE, // 페이지당 아이템 수
           total: data?.data.page.totalCount || 0,
           showSizeChanger: false,
           onChange: handleChangePage,

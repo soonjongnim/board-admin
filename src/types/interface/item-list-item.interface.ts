@@ -8,4 +8,5 @@ export default interface ItemListItem {
 	regTime: string;
 	updateTime: string;
 	writerEmail: string;
+	thumbnailUrl: string[];
 }

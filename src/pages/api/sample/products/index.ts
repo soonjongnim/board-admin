@@ -185,8 +185,11 @@ export const ThumbnailsDeleteRequest = async (itemId: number | string, deletedSe
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const page = req.query.page ? Number(req.query.page) : 1;
   console.log('products index.ts > req.method: ', req.method);
+  // page와 itemsPerPage를 쿼리 파라미터에서 가져오기
+  const page = req.query.page ? Number(req.query.page) : 1;
+  const itemsPerPage = req.query.defaultPageSize ? Number(req.query.defaultPageSize) : 5;
+
   if (req.method === "POST") {
     // 생성
     console.log('POST req.body: ', req.body);
@@ -216,6 +219,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       params.append('searchQuery', req.query.searchQuery as string || '');
       params.append('startDate', req.query['searchDatePeriod[0]'] as string || '');
       params.append('endDate', req.query['searchDatePeriod[1]'] as string || '');
+      // 페이지네이션 파라미터 추가
+      params.append('page', page.toString());
+      params.append('itemsPerPage', itemsPerPage.toString());
       // params.append('itemSellStatuss0', req.query['itemSellStatuss[0]'] as string);
       // params.append('itemSellStatuss1', req.query['itemSellStatuss[1]'] as string);
       // params.append('itemSellStatuss2', req.query['itemSellStatuss[2]'] as string);
@@ -250,7 +256,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       const items: GetItemListResponseDto | ResponseDto | null = await getSearchItemListRequest(params);
       // const items: GetItemListResponseDto | ResponseDto | null = await getItemListRequest();
-      const { searchList } = items as GetItemListResponseDto;
+      const { searchList, totalCount } = items as GetItemListResponseDto;
       if (!items || !items) {
         // Handle the case where itemList is null or undefined
         throw new Error("itemList not found in response");
@@ -258,18 +264,30 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       
       // const { itemList } = response;
       // console.log('items: ', items); // Logging itemList received from the API
-      // console.log('searchList: ', searchList); // Logging itemList received from the API
-  
+      // const itemsPerPage = 5; // 페이지당 보여줄 아이템 수
+      // const totalItems = searchList.length;
+      const totalPages = Math.ceil(totalCount / itemsPerPage);
+      console.log('totalPages: ', totalPages);
+      console.log('totalCount: ', totalCount);
+      console.log('page: ', page);
+      // 현재 페이지에 해당하는 아이템들을 계산
+      const startIndex = (1 - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      const currentPageItems = searchList.slice(startIndex, endIndex);
+      console.log('startIndex: ', startIndex);
+      console.log('endIndex: ', endIndex);
+      console.log('currentPageItems: ', currentPageItems);
+
       res.status(200).json({
         code: 0,
         message: "OK",
         data: {
-          items: page === 1 ? searchList.slice(0, 5) : [searchList[5]], // Using itemList instead of productSampleItems
+          items: currentPageItems,
           page: {
             currentPage: page,
-            pageSize: 5,
-            totalPage: 1,
-            totalCount: searchList.length,
+            pageSize: itemsPerPage,
+            totalPage: totalPages,
+            totalCount: totalCount,
           },
         },
       });

@@ -25,7 +25,8 @@ const ProductSearch = () => {
       // console.log('searchDatePeriod: ', formValue.searchDatePeriod.map((date: { format: (arg0: string) => any; }) => date?.format('YYYY-MM-DD')) )
       router.push({
         pathname: router.pathname,
-        query: { ...router.query, ...formValue, 
+        query: { ...router.query, ...formValue,
+        page: 1,
         searchDatePeriod: formValue.searchDatePeriod ? formValue.searchDatePeriod.map((date: { format: (arg0: string) => any; }) => date?.format('YYYY-MM-DD')) : ['', '']}
       });
     },

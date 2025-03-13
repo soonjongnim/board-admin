@@ -3,4 +3,5 @@ import ResponseDto from '../response.dto';
 
 export default interface GetItemListResponseDto extends ResponseDto {
     searchList: ItemListItem[];
+    totalCount: number;
 }

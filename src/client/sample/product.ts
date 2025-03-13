@@ -27,6 +27,7 @@ export interface IProductFormValue extends Omit<Item, "itemId" | "regTime" | "up
 
 interface IProductsParams {
   page?: number;
+  defaultPageSize?: number;
 }
 
 export interface IProductsResponse {
